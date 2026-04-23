@@ -1,8 +1,11 @@
 import argparse
+import os
+import select
+import sys
 import time
+from contextlib import AbstractContextManager
 from dataclasses import dataclass
 
-import glfw
 import mujoco as mj
 import mujoco.viewer
 import numpy as np
@@ -25,6 +28,83 @@ class TeleopState:
     suction_on: bool = False
     reset_requested: bool = False
     print_requested: bool = False
+
+
+@dataclass
+class SimulationSnapshot:
+    qpos: np.ndarray
+    qvel: np.ndarray
+    ctrl: np.ndarray
+    act: np.ndarray | None
+    time: float
+
+
+class TerminalKeyReader(AbstractContextManager["TerminalKeyReader"]):
+    def __init__(self) -> None:
+        self._enabled = sys.stdin.isatty()
+        self._fd: int | None = None
+        self._old_settings = None
+
+    @property
+    def enabled(self) -> bool:
+        return self._enabled
+
+    def __enter__(self) -> "TerminalKeyReader":
+        if not self._enabled:
+            return self
+
+        if os.name == "nt":
+            return self
+
+        import termios
+        import tty
+
+        self._fd = sys.stdin.fileno()
+        self._old_settings = termios.tcgetattr(self._fd)
+        tty.setcbreak(self._fd)
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        if not self._enabled or os.name == "nt" or self._fd is None or self._old_settings is None:
+            return None
+
+        import termios
+
+        termios.tcsetattr(self._fd, termios.TCSADRAIN, self._old_settings)
+        return None
+
+    def read_key(self) -> str | None:
+        if not self._enabled:
+            return None
+
+        if os.name == "nt":
+            import msvcrt
+
+            if not msvcrt.kbhit():
+                return None
+            key = msvcrt.getwch()
+            if key in ("\x00", "\xe0"):
+                # Swallow the second code unit for function / arrow keys.
+                if msvcrt.kbhit():
+                    msvcrt.getwch()
+                return None
+            return key
+
+        ready, _, _ = select.select([sys.stdin], [], [], 0.0)
+        if not ready:
+            return None
+
+        key = sys.stdin.read(1)
+        if key == "\x1b":
+            # Drain the rest of an escape sequence (arrows, etc.) and ignore it.
+            while True:
+                ready, _, _ = select.select([sys.stdin], [], [], 0.0)
+                if not ready:
+                    break
+                sys.stdin.read(1)
+            return None
+
+        return key
 
 
 def current_ee_position(env: DobotPickPlace) -> np.ndarray:
@@ -56,17 +136,62 @@ def compute_cartesian_action(
     return action, ee_pos, pos_err
 
 
-def hard_reset(env: DobotPickPlace) -> None:
+def capture_sim_snapshot(env: DobotPickPlace) -> SimulationSnapshot:
+    act = env.data.act.copy() if env.model.na != 0 else None
+    return SimulationSnapshot(
+        qpos=env.data.qpos.copy(),
+        qvel=env.data.qvel.copy(),
+        ctrl=env.data.ctrl.copy(),
+        act=act,
+        time=float(env.data.time),
+    )
+
+
+def hard_reset(env: DobotPickPlace, snapshot: SimulationSnapshot) -> None:
     mj.mj_resetData(env.model, env.data)
-    env.data.time = env.initial_time
-    env.data.qpos[:] = np.copy(env.initial_qpos)
-    env.data.qvel[:] = np.copy(env.initial_qvel)
-    if env.model.na != 0:
-        env.data.act[:] = None
+    env.data.time = snapshot.time
+    env.data.qpos[:] = snapshot.qpos
+    env.data.qvel[:] = snapshot.qvel
+    env.data.ctrl[:] = snapshot.ctrl
+    if env.model.na != 0 and snapshot.act is not None:
+        env.data.act[:] = snapshot.act
     mj.mj_forward(env.model, env.data)
+    env.goal = env.data.body("goal_marker").xpos.copy()
     env.previous_grasped = False
     env.grasped = False
     env.suction_activated = False
+
+
+def handle_terminal_key(state: TeleopState, key: str, step_size: float) -> bool:
+    key_lower = key.lower()
+
+    if key_lower == "w":
+        state.desired_pos[0] += step_size
+    elif key_lower == "s":
+        state.desired_pos[0] -= step_size
+    elif key_lower == "a":
+        state.desired_pos[1] -= step_size
+    elif key_lower == "d":
+        state.desired_pos[1] += step_size
+    elif key_lower == "r":
+        state.desired_pos[2] += step_size
+    elif key_lower == "f":
+        state.desired_pos[2] -= step_size
+    elif key == " ":
+        state.suction_on = not state.suction_on
+        print(f"Suction {'ON' if state.suction_on else 'OFF'}")
+    elif key_lower == "h":
+        state.desired_pos[:] = state.home_pos
+        print(f"Target reset to home pose: {state.home_pos}")
+    elif key in ("\r", "\n"):
+        state.print_requested = True
+    elif key in ("\x08", "\x7f"):
+        state.reset_requested = True
+    elif key_lower == "q":
+        return True
+
+    state.desired_pos[:] = np.clip(state.desired_pos, WORKSPACE_MIN, WORKSPACE_MAX)
+    return False
 
 
 def print_status(env: DobotPickPlace, state: TeleopState) -> None:
@@ -89,36 +214,6 @@ def print_status(env: DobotPickPlace, state: TeleopState) -> None:
     )
 
 
-def make_key_callback(state: TeleopState, step_size: float):
-    def key_callback(keycode: int) -> None:
-        if keycode == glfw.KEY_W:
-            state.desired_pos[0] += step_size
-        elif keycode == glfw.KEY_S:
-            state.desired_pos[0] -= step_size
-        elif keycode == glfw.KEY_A:
-            state.desired_pos[1] -= step_size
-        elif keycode == glfw.KEY_D:
-            state.desired_pos[1] += step_size
-        elif keycode == glfw.KEY_R:
-            state.desired_pos[2] += step_size
-        elif keycode == glfw.KEY_F:
-            state.desired_pos[2] -= step_size
-        elif keycode == glfw.KEY_SPACE:
-            state.suction_on = not state.suction_on
-            print(f"Suction {'ON' if state.suction_on else 'OFF'}")
-        elif keycode == glfw.KEY_BACKSPACE:
-            state.reset_requested = True
-        elif keycode == glfw.KEY_H:
-            state.desired_pos[:] = state.home_pos
-            print(f"Target reset to home pose: {state.home_pos}")
-        elif keycode == glfw.KEY_ENTER:
-            state.print_requested = True
-
-        state.desired_pos[:] = np.clip(state.desired_pos, WORKSPACE_MIN, WORKSPACE_MAX)
-
-    return key_callback
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="Keyboard teleoperation for the Dobot scene.")
     parser.add_argument("--seed", type=int, default=0, help="Environment seed.")
@@ -132,6 +227,7 @@ def main() -> None:
 
     env = DobotPickPlace(render_mode=None, position_jitter=0.0)
     env.reset(seed=args.seed)
+    initial_snapshot = capture_sim_snapshot(env)
 
     initial_pos = current_ee_position(env)
     state = TeleopState(
@@ -139,7 +235,8 @@ def main() -> None:
         home_pos=initial_pos.copy(),
     )
 
-    print("Keyboard teleop")
+    print("Keyboard teleop (terminal-driven)")
+    print("  Keep the terminal focused while the MuJoCo window is open.")
     print("  W/S: +X / -X")
     print("  A/D: -Y / +Y")
     print("  R/F: +Z / -Z")
@@ -147,34 +244,44 @@ def main() -> None:
     print("  H: return target to home pose")
     print("  Enter: print current actuator targets and pose")
     print("  Backspace: reset scene")
+    print("  Q: quit teleop")
     print(f"  Starting EE pose: {initial_pos}")
 
-    with mujoco.viewer.launch_passive(
-        env.model,
-        env.data,
-        key_callback=make_key_callback(state, args.step_size),
-    ) as viewer:
-        while viewer.is_running():
-            if state.reset_requested:
-                hard_reset(env)
-                state.reset_requested = False
-                state.suction_on = False
-                state.desired_pos[:] = current_ee_position(env)
-                state.home_pos[:] = state.desired_pos
-                print("Scene reset.")
+    with TerminalKeyReader() as key_reader:
+        if not key_reader.enabled:
+            raise RuntimeError("teleop_keyboard.py needs to be run from an interactive terminal.")
 
-            action, _, _ = compute_cartesian_action(env, state.desired_pos, state.suction_on)
-            obs, reward, terminated, truncated, info = env.step(action)
+        with mujoco.viewer.launch_passive(env.model, env.data) as viewer:
+            should_quit = False
+            while viewer.is_running() and not should_quit:
+                while True:
+                    key = key_reader.read_key()
+                    if key is None:
+                        break
+                    should_quit = handle_terminal_key(state, key, args.step_size)
+                    if should_quit:
+                        break
 
-            if state.print_requested:
-                print_status(env, state)
-                state.print_requested = False
+                if state.reset_requested:
+                    hard_reset(env, initial_snapshot)
+                    state.reset_requested = False
+                    state.suction_on = False
+                    state.desired_pos[:] = current_ee_position(env)
+                    state.home_pos[:] = state.desired_pos
+                    print("Scene reset.")
 
-            if terminated:
-                print("Task success reached. Press Backspace to reset or keep driving.")
+                action, _, _ = compute_cartesian_action(env, state.desired_pos, state.suction_on)
+                obs, reward, terminated, truncated, info = env.step(action)
 
-            viewer.sync()
-            time.sleep(0.002)
+                if state.print_requested:
+                    print_status(env, state)
+                    state.print_requested = False
+
+                if terminated:
+                    print("Task success reached. Press Backspace to reset or keep driving.")
+
+                viewer.sync()
+                time.sleep(0.002)
 
     env.close()
 
