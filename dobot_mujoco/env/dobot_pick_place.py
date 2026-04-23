@@ -77,7 +77,7 @@ class DobotPickPlace(DobotCubeStack):
         goal_body.pos = goal_pos
         goal_body.add_geom(
             type=mj.mjtGeom.mjGEOM_CYLINDER,
-            size=[0.03, 0.002],
+            size=[0.03, 0.03, 0.002],
             rgba=[0.15, 0.85, 0.2, 0.35],
             contype=0,
             conaffinity=0,
@@ -85,7 +85,7 @@ class DobotPickPlace(DobotCubeStack):
         goal_body.add_site(
             name="goal_site",
             type=mj.mjtGeom.mjGEOM_SPHERE,
-            size=[0.01],
+            size=[0.01, 0.01, 0.01],
             rgba=[0.15, 0.85, 0.2, 0.9],
         )
 
