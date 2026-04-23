@@ -1,0 +1,410 @@
+<mujoco model="Dobot">
+  <compiler angle="radian" meshdir="meshes/" />
+  <option timestep="1e-3" solver="Newton" integrator="Euler"/>
+
+  <asset>
+    <mesh name="dobot_coppelia_link1_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_link1_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_link1_visible_vis_2" content_type="model/stl"
+      file="dobot_coppelia_link1_visible_vis_2.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_2" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_2.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_3" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_3.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_4" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_4.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_5" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_5.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_6" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_6.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_7" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_7.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_8" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_8.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_9" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_9.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_10" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_10.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_11" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_11.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_12" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_12.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_13" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_13.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_14" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_14.stl" />
+    <mesh name="dobot_coppelia_link2_visible_vis_15" content_type="model/stl"
+      file="dobot_coppelia_link2_visible_vis_15.stl" />
+    <mesh name="dobot_coppelia_link_2_coll_1" content_type="model/stl"
+      file="dobot_coppelia_link_2_coll_1.stl" />
+    <mesh name="dobot_coppelia_link_2_coll_2" content_type="model/stl"
+      file="dobot_coppelia_link_2_coll_2.stl" />
+    <mesh name="dobot_coppelia_link_2_coll_3" content_type="model/stl"
+      file="dobot_coppelia_link_2_coll_3.stl" />
+    <mesh name="dobot_coppelia_link3_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_link3_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_link3_visible_vis_2" content_type="model/stl"
+      file="dobot_coppelia_link3_visible_vis_2.stl" />
+    <mesh name="dobot_coppelia_link3_visible_vis_3" content_type="model/stl"
+      file="dobot_coppelia_link3_visible_vis_3.stl" />
+    <mesh name="dobot_coppelia_auxLink_coll_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink_coll_1.stl" />
+    <mesh name="dobot_coppelia_auxLink4_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink4_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_link_3_coll_1" content_type="model/stl"
+      file="dobot_coppelia_link_3_coll_1.stl" />
+    <mesh name="dobot_coppelia_link_3_coll_2" content_type="model/stl"
+      file="dobot_coppelia_link_3_coll_2.stl" />
+    <mesh name="dobot_coppelia_link_3_coll_3" content_type="model/stl"
+      file="dobot_coppelia_link_3_coll_3.stl" />
+    <mesh name="dobot_coppelia_link_3_coll_4" content_type="model/stl"
+      file="dobot_coppelia_link_3_coll_4.stl" />
+    <mesh name="dobot_coppelia_link_3_coll_5" content_type="model/stl"
+      file="dobot_coppelia_link_3_coll_5.stl" />
+    <mesh name="dobot_coppelia_link4_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_link4_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_link4_visible_vis_2" content_type="model/stl"
+      file="dobot_coppelia_link4_visible_vis_2.stl" />
+    <mesh name="dobot_coppelia_link4_visible_vis_3" content_type="model/stl"
+      file="dobot_coppelia_link4_visible_vis_3.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_1" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_1.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_2" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_2.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_3" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_3.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_4" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_4.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_5" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_5.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_6" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_6.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_7" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_7.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_8" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_8.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_9" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_9.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_10" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_10.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_11" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_11.stl" />
+    <mesh name="dobot_coppelia_link_4_coll_12" content_type="model/stl"
+      file="dobot_coppelia_link_4_coll_12.stl" />
+    <mesh name="dobot_coppelia_link5_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_link5_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_auxLink_2_coll_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink_2_coll_1.stl" />
+    <mesh name="dobot_coppelia_auxLink5_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink5_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_suctionCup_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_suctionCup_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_suctionCup_link2_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_suctionCup_link2_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_suctionCup_link2_visible_vis_2" content_type="model/stl"
+      file="dobot_coppelia_suctionCup_link2_visible_vis_2.stl" />
+    <mesh name="dobot_coppelia_suctionCup_link2_visible_vis_3" content_type="model/stl"
+      file="dobot_coppelia_suctionCup_link2_visible_vis_3.stl" />
+    <mesh name="dobot_coppelia_auxLink_3_coll_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink_3_coll_1.stl" />
+    <mesh name="dobot_coppelia_auxLink2_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink2_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_auxLink3_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink3_visible_vis_1.stl" />
+    <mesh name="dobot_coppelia_auxLink1_visible_vis_1" content_type="model/stl"
+      file="dobot_coppelia_auxLink1_visible_vis_1.stl" />
+  </asset>
+
+  <worldbody>
+    <body name="dobot_base">
+      <geom name="Dobot" size="0.025 0.079 0.079" pos="0 0 0.025018" quat="0.5 -0.5 -0.5 -0.5"
+        type="box" group="3" />
+      <geom name="link1_visible" pos="0 0 0.025018"
+        quat="1 0 0 0"
+        type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1"
+        mesh="dobot_coppelia_link1_visible_vis_1" />
+      <geom pos="0 0 0.025018" quat="1 0 0 0" type="mesh"
+        contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+        mesh="dobot_coppelia_link1_visible_vis_2" />
+      <body name="shoulder_base_link" pos="0 -1e-06 0.049188"
+        quat="1 0 0 0">
+        <inertial pos="0.000515 0.002043 0.059772" quat="0.489394 0.507 0.491229 0.511996"
+          mass="2.364" diaginertia="0.00693354 0.00515403 0.00272303" />
+        <joint name="motor1" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708"
+          actuatorfrcrange="-20 20" />
+        <geom name="link" size="0.0025 0.028006 0.0519085" pos="-0.0265 0 0.052847"
+          quat="1 0 0 0" type="box" group="3" />
+        <geom size="0.0025 0.0155 0.028" pos="0.0395 1e-06 0.003442" quat="0.5 -0.5 -0.5 -0.5"
+          type="box" group="3" />
+        <geom size="0.0025 0.028006 0.051908" pos="0.0265 0 0.052847"
+          quat="0 0 0 -1" type="box" group="3" />
+        <geom size="0.0211522 0.0302674" pos="0.058233 1e-06 0.081754"
+          quat="-0.541644 -0.454556 0.541648 0.454552" type="cylinder" group="3" />
+        <geom size="0.0025 0.0132295 0.016" pos="-0.004 0.033732 0.003442"
+          quat="0.707107 0 -0.707107 0" type="box" group="3" />
+        <geom size="0.003 0.0132295 0.054967" pos="0.009 0.033732 0.05591"
+          quat="0 0 0 1" type="box" group="3" />
+        <geom size="0.0025 0.0155 0.028" pos="-0.0395 1e-06 0.003442" quat="0.5 -0.5 -0.5 -0.5"
+          type="box" group="3" />
+        <geom size="0.0205005 0.029501" pos="0 0 0.029943" quat="-1 0 0 0" type="cylinder" group="3" />
+        <geom size="0.0211523 0.0301254" pos="-0.058375 1e-06 0.081754"
+          quat="-0.541642 -0.454559 0.54165 0.454549" type="cylinder" group="3" />
+        <geom size="0.0129715 0.00625005" pos="0.01175 -2.1e-05 0.08081"
+          quat="0.322671 -0.629194 0.322667 -0.629193" type="cylinder" group="3" />
+        <geom size="0.0129714 0.0062501" pos="-0.00675 -3.5e-05 0.080828"
+          quat="0.119642 -0.696911 0.119641 -0.696912" type="cylinder" group="3" />
+        <geom name="link2_visible" pos="0 0.000125 0.052998"
+          quat="1 0 0 0" type="mesh" contype="0" conaffinity="0"
+          group="1" density="0" rgba="1 1 1 1" mesh="dobot_coppelia_link2_visible_vis_1" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_2" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_3" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_4" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_5" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_6" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_7" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_8" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_9" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_10" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_11" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_12" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_13" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+          mesh="dobot_coppelia_link2_visible_vis_14" />
+        <geom pos="0 0.000125 0.052998" quat="1 0 0 0" type="mesh"
+          contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1"
+          mesh="dobot_coppelia_link2_visible_vis_15" />
+        <body name="lower_arm_link" pos="0.03565 -2.1e-05 0.08081" quat="0.707107 0 0.707107 0">
+          <inertial pos="-0.075356 0.024599 -0.03565"
+            quat="0.999947 0.0102627 -1.50046e-06 -1.62319e-05" mass="2.06529"
+            diaginertia="0.0045309 0.00394512 0.000997483" />
+          <joint name="motor2" pos="0 0 0" axis="0 0 1" range="0 1.48353" actuatorfrcrange="-20 20" />
+          <geom pos="-0.076449 0.025292 -0.03565" quat="0.707107 0 -0.707107 0" type="mesh"
+            mesh="dobot_coppelia_link_2_coll_1" group="3" />
+          <geom pos="-0.076449 0.025292 -0.03565" quat="0.707107 0 -0.707107 0" type="mesh"
+            mesh="dobot_coppelia_link_2_coll_2" group="3" />
+          <geom pos="-0.076449 0.025292 -0.03565" quat="0.707107 0 -0.707107 0" type="mesh"
+            mesh="dobot_coppelia_link_2_coll_3" group="3" />
+          <geom name="link3_visible" pos="-0.076448 0.024891 -0.03565" quat="0.707107 0 -0.707107 0"
+            type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1"
+            mesh="dobot_coppelia_link3_visible_vis_1" />
+          <geom pos="-0.076448 0.024891 -0.03565" quat="0.707107 0 -0.707107 0" type="mesh"
+            contype="0" conaffinity="0" group="1" density="0" rgba="1 1 0.3 1"
+            mesh="dobot_coppelia_link3_visible_vis_2" />
+          <geom pos="-0.076448 0.024891 -0.03565" quat="0.707107 0 -0.707107 0" type="mesh"
+            contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+            mesh="dobot_coppelia_link3_visible_vis_3" />
+          <body name="auxLink" pos="-0.135019 7.6e-05 -0.03565"
+            quat="1 0 0 0">
+            <inertial pos="-0.017105 0.001735 0.0085"
+              quat="0.74315 0.669125 -1.94499e-06 2.16016e-06"
+              mass="0.018" diaginertia="1.02931e-05 8.48064e-06 1.88749e-06" />
+            <joint name="auxJoint_2" pos="0 0 0" axis="0 0 1" />
+            <geom name="auxLink" pos="-0.013821 0.002467 0.0085" quat="0.707107 0 -0.707107 0"
+              type="mesh" mesh="dobot_coppelia_auxLink_coll_1" group="3" />
+            <geom name="auxLink4_visible" pos="-0.013859 0.002424 0.0085"
+              quat="0.707107 0 -0.707107 0" type="mesh" contype="0" conaffinity="0" group="1"
+              density="0" rgba="0.2 0.2 0.2 1" mesh="dobot_coppelia_auxLink4_visible_vis_1" />
+          </body>
+          <body name="upper_arm_link" pos="-0.135019 7.6e-05 -0.03565"
+            quat="1 0 0 0">
+            <inertial pos="-0.026985 -0.054645 -1e-06"
+              quat="0.706203 0.70801 1.77542e-05 -2.21523e-05" mass="0.118"
+              diaginertia="0.000350961 0.000307889 5.98155e-05" />
+            <joint name="auxMotor1" pos="0 0 0" axis="0 0 1" />
+            <geom pos="-0.030008 -0.05364 0" quat="0.707107 0 -0.707107 0" type="mesh"
+              mesh="dobot_coppelia_link_3_coll_1" group="3" />
+            <geom pos="-0.030008 -0.05364 0" quat="0.707107 0 -0.707107 0" type="mesh"
+              mesh="dobot_coppelia_link_3_coll_2" group="3" />
+            <geom pos="-0.030008 -0.05364 0" quat="0.707107 0 -0.707107 0" type="mesh"
+              mesh="dobot_coppelia_link_3_coll_3" group="3" />
+            <geom pos="-0.030008 -0.05364 0" quat="0.707107 0 -0.707107 0" type="mesh"
+              mesh="dobot_coppelia_link_3_coll_4" group="3" />
+            <geom pos="-0.030008 -0.05364 0" quat="0.707107 0 -0.707107 0" type="mesh"
+              mesh="dobot_coppelia_link_3_coll_5" group="3" />
+            <geom name="link4_visible" pos="-0.030038 -0.053551 1e-06" quat="0.707107 0 -0.707107 0"
+              type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1"
+              mesh="dobot_coppelia_link4_visible_vis_1" />
+            <geom pos="-0.030038 -0.053551 1e-06" quat="0.707107 0 -0.707107 0" type="mesh"
+              contype="0" conaffinity="0" group="1" density="0" rgba="1 1 0.3 1"
+              mesh="dobot_coppelia_link4_visible_vis_2" />
+            <geom pos="-0.030038 -0.053551 1e-06" quat="0.707107 0 -0.707107 0" type="mesh"
+              contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+              mesh="dobot_coppelia_link4_visible_vis_3" />
+            <body name="tool_link" pos="-7.8e-05 -0.147055 0"
+              quat="-1 1.73205e-07 1.73205e-07 -1.73205e-07">
+              <inertial pos="-0.012026 -0.051144 1.2e-05"
+                quat="0.763358 0.645976 -7.70174e-05 9.25866e-05" mass="0.13"
+                diaginertia="0.000231364 0.000187365 5.99645e-05" />
+              <joint name="auxMotor2" pos="0 0 0" axis="0 0 1" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_1" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_2" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_3" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_4" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_5" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_6" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_7" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_8" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_9" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_10" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_11" group="3" />
+              <geom pos="-0.015429 -0.044878 3.5e-05" quat="0.707107 0 -0.707107 0" type="mesh"
+                mesh="dobot_coppelia_link_4_coll_12" group="3" />
+              <geom name="link5_visible" pos="-0.009484 -0.044867 -2.1e-05"
+                quat="0.707107 0 -0.707107 0" type="mesh" contype="0" conaffinity="0" group="1"
+                density="0" rgba="0.2 0.2 0.2 1" mesh="dobot_coppelia_link5_visible_vis_1" />
+              <body name="auxLink_2" pos="-0.027689 -0.032943 0.006"
+                quat="-1 1.73205e-07 1.73205e-07 -1.73205e-07">
+                <inertial pos="2.9e-05 0.07352 -0.0025" quat="0.707107 0.707107 0 0" mass="0.018"
+                  diaginertia="3.94263e-05 3.89891e-05 5.1226e-07" />
+                <joint name="auxJoint_3" pos="0 0 0" axis="0 0 1" />
+                <geom pos="2.9e-05 0.07352 -0.0025" quat="0.707107 0 -0.707107 0" type="mesh"
+                  mesh="dobot_coppelia_auxLink_2_coll_1" group="3" />
+                <geom name="auxLink5_visible" pos="2.9e-05 0.07352 -0.006003"
+                  quat="0.707107 0 -0.707107 0" type="mesh" contype="0" conaffinity="0" group="1"
+                  density="0" rgba="0.2 0.2 0.2 1" mesh="dobot_coppelia_auxLink5_visible_vis_1" />
+              </body>
+              <body name="suctionCup" pos="0.011773 -0.059706 3.4e-05" quat="0.707107 0 -0.707107 0">
+                <inertial pos="0 0 -0.0163" mass="0.08"
+                  diaginertia="7.58788e-06 7.58788e-06 3.21133e-06" />
+                <joint name="motor4" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708"
+                  actuatorfrcrange="-20 20" />
+                <geom name="suctionCup" size="0.0089738 0.0150005" pos="0 0 -0.0163"
+                  quat="6.00024e-06 -8.25047e-07 0.000291327 1" type="cylinder" group="3" />
+                <geom name="suctionCup_visible" pos="-7e-05 0 -0.0163"
+                  quat="1 0 0 0" type="mesh" contype="0"
+                  conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+                  mesh="dobot_coppelia_suctionCup_visible_vis_1" />
+                <body name="suctionCup_link2" pos="0 0 -0.0353"
+                  quat="0.999955 -0.00926683 -0.00102493 -0.00159589">
+                  <inertial pos="0 0.000224 -0.013224"
+                    quat="1 -0.000116785 0.000235739 0" mass="0.08"
+                    diaginertia="1.31253e-05 1.31253e-05 3.02958e-06" />
+                  <joint name="suctionCup_play" pos="0 0 0" axis="0 0 1" type="slide"
+                    range="0 0.005"
+                    actuatorfrcrange="-50 50" />
+                  <geom name="suctionCup_link2" size="0.00999761 0.00700407"
+                    pos="-7e-06 0.000347 -0.019998" quat="-0.858513 -0.00744563 -0.005658 0.512707"
+                    type="cylinder" group="3" />
+                  <geom size="0.00349995 0.0145008" pos="6.9e-05 -0.000192 0.009498"
+                    quat="-0.858513 -0.00744563 -0.005658 0.512707" type="cylinder" group="3" />
+                  <geom size="0.0064645 0.00400104" pos="2.4e-05 0.000147 -0.008999"
+                    quat="-0.858513 -0.00744563 -0.005658 0.512707" type="cylinder" group="3" />
+                  <geom name="suctionCup_link2_visible" pos="3.3e-05 -3.4e-05 -0.001502"
+                    quat="0.999955 0.00926706 0.00102516 0.00159589" type="mesh" contype="0"
+                    conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+                    mesh="dobot_coppelia_suctionCup_link2_visible_vis_1" />
+                  <geom pos="3.3e-05 -3.4e-05 -0.001502"
+                    quat="0.999955 0.00926706 0.00102516 0.00159589" type="mesh" contype="0"
+                    conaffinity="0" group="1" density="0" rgba="1 1 1 1"
+                    mesh="dobot_coppelia_suctionCup_link2_visible_vis_2" />
+                  <geom pos="3.3e-05 -3.4e-05 -0.001502"
+                    quat="0.999955 0.00926706 0.00102516 0.00159589" type="mesh" contype="0"
+                    conaffinity="0" group="1" density="0" rgba="0.81 0.81 0.81 1"
+                    mesh="dobot_coppelia_suctionCup_link2_visible_vis_3" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="auxLink_3" pos="-0.0307 -3.5e-05 0.080828" quat="0.707107 0 0.707107 0">
+          <inertial pos="-1.3e-05 0.015974 0.0152" quat="0.707109 0.707104 8.41457e-07 8.41451e-07"
+            mass="0.018" diaginertia="3.59541e-05 3.1164e-05 5.20493e-06" />
+          <joint name="motor3" pos="0 0 0" axis="0 0 1" range="-0.174533 1.309"
+            actuatorfrcrange="-20 20" />
+          <geom pos="-1.3e-05 0.018536 0.0152" quat="0.707107 0 -0.707107 0" type="mesh"
+            mesh="dobot_coppelia_auxLink_3_coll_1" group="3" />
+          <geom name="auxLink2_visible" pos="-1.3e-05 0.018536 0.02145"
+            quat="0.707107 0 -0.707107 0"
+            type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+            mesh="dobot_coppelia_auxLink2_visible_vis_1" />
+          <body name="auxLink_4" pos="1.3e-05 0.043012 0.01755"
+            quat="-1 1.73205e-07 1.73205e-07 -1.73205e-07">
+            <inertial pos="-0.067526 2.4e-05 0.00265" mass="0.018"
+              diaginertia="3.55996e-05 3.51513e-05 5.23289e-07" />
+            <joint name="auxJoint_4" pos="0 0 0" axis="0 0 1" />
+            <geom size="0.0025 0.008998 0.0765" pos="-0.067526 2.4e-05 0.00265"
+              quat="-9.90595e-06 -0.707107 -8.72377e-06 0.707107" type="box" group="3" />
+            <geom name="auxLink3_visible" pos="-0.067526 2.4e-05 0.00265"
+              quat="0.707107 0 -0.707107 0" type="mesh" contype="0" conaffinity="0" group="1"
+              density="0" rgba="0.2 0.2 0.2 1" mesh="dobot_coppelia_auxLink3_visible_vis_1" />
+          </body>
+        </body>
+        <body name="auxLink_5" pos="0.00615 0.037927 0.101037" quat="0.707107 0 0.707107 0">
+          <inertial pos="-0.067492 3.4e-05 -0.00265" mass="0.018"
+            diaginertia="3.55997e-05 3.51514e-05 5.2329e-07" />
+          <joint name="auxJoint" pos="0 0 0" axis="0 0 1" />
+          <geom size="0.0025 0.008998 0.0765" pos="-0.067492 3.4e-05 -0.00265"
+            quat="8.14703e-06 0.707107 1.06999e-05 -0.707107" type="box" group="3" />
+          <geom name="auxLink1_visible" pos="-0.067492 3.4e-05 -0.00265"
+            quat="0.707107 0 -0.707107 0"
+            type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1"
+            mesh="dobot_coppelia_auxLink1_visible_vis_1" />
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <equality>
+    <connect name="auxConnect_4_3" body1="auxLink_4" anchor="-0.135 0 0" body2="upper_arm_link"
+      solimp="1 1 0.001 0.5 2" />
+    <connect name="auxConnect_5_1" body1="auxLink_5" anchor="-0.135 0 0" body2="auxLink"
+      solimp="1 1 0.001 0.5 2" />
+    <connect name="auxConnect_1_2" body1="auxLink" anchor="-0.02774 -0.03294 0.00615"
+      body2="auxLink_2" solimp="1 1 0.001 0.5 2" />
+  </equality>
+
+  <actuator>
+    <position name="shoulder_pan" joint="motor1" ctrlrange="-1.5708 1.5708" forcerange="-20 20"
+      kp="2.5" kv="1" />
+    <position name="shoulder_lift" joint="motor2" ctrlrange="0 1.48353" forcerange="-20 20" kp="5"
+      kv="1" />
+    <position name="elbow_lift" joint="motor3" ctrlrange="-0.174533 1.309" forcerange="-20 20"
+      kp="5" kv="1" />
+    <position name="tool_roll" joint="motor4" ctrlrange="-1.5708 1.5708" forcerange="-5 5"
+      kp="0.05" kv="0.01" />
+
+    <adhesion name="suction_cup_pump" body="suctionCup_link2" ctrlrange="0 1" gain="5"/>
+  </actuator>
+
+  <contact>
+    <exclude body1="dobot_base" body2="shoulder_base_link" />
+  </contact>
+</mujoco>

@@ -1,0 +1,65 @@
+<mujoco model="Dobot">
+  <compiler angle="radian" meshdir="meshes/" />
+  <option timestep="1e-3" solver="Newton" integrator="Euler" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-120" elevation="-20" />
+  </visual>
+
+  <asset>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+      rgb2="0.1 0.2 0.3"
+      markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="1 1 1" width="512"
+      height="3072" />
+    <material name="table_mat" rgba="0.25 0.17 0.12 1" />
+    <material name="ground_mat" texture="groundplane" texrepeat="4 4" texuniform="true" />
+
+    <!-- Robot MJCF model as an asset -->
+    <model name="dobot_model" file="dobot_suction_cup.xml" />
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+
+    <!-- ========== Ground plane ========== -->
+    <geom name="ground" type="plane"
+      size="0 0 0.05"
+      pos="0 0 0"
+      material="ground_mat"
+      condim="3" />
+
+    <!-- Table -->
+    <body name="table" pos="0 0 0.35">
+
+      <geom name="table_top" type="box" size="0.5 0.5 0.02" pos="0 0 0" material="table_mat"
+        condim="3" />
+      <geom name="table_leg1" type="box" size="0.02 0.02 0.175" pos="0.45 0.45 -0.175"
+        material="table_mat" />
+      <geom name="table_leg2" type="box" size="0.02 0.02 0.175" pos="-0.45 0.45 -0.175"
+        material="table_mat" />
+      <geom name="table_leg3" type="box" size="0.02 0.02 0.175" pos="0.45 -0.45 -0.175"
+        material="table_mat" />
+      <geom name="table_leg4" type="box" size="0.02 0.02 0.175" pos="-0.45 -0.45 -0.175"
+        material="table_mat" />
+
+      <body name="dobot" pos="0 0.10 0.02">
+        <!-- Attach Dobot robot model (from asset) on top of the table -->
+        <attach model="dobot_model" prefix="" />
+      </body>
+
+    </body>
+
+
+    <!-- Camera -->
+    <camera name="front" pos="0.6 0.0 0.75" quat="0.7071 0.7071 0 0" fovy="90" />
+  </worldbody>
+
+  <!-- Optional collision exclusions -->
+  <contact>
+    <exclude body1="dobot_base" body2="table" />
+  </contact>
+
+</mujoco>
