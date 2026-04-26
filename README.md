@@ -58,23 +58,52 @@ If you are using the Python `mujoco` package, it already ships the runtime neede
 
 ## Using the training script (`train.py`)
 
-`train.py` is a minimal example showing how to create the environment and train a CrossQ agent.
+`train.py` is a minimal example showing how to create the environment, train an agent, and optionally export replay bundles for review.
 
 Basic usage:
 
 ```bash
-python train.py --n-timesteps 200000 --tensorboard-log logs/exp1 --progress-bar
+python train.py --algo ppo --curriculum basic --n-timesteps 200000 --device cpu
 ```
 
 Command-line options available (default shown in script):
-- `--n-timesteps`: number of training timesteps (default 200000)
-- `--log-interval`: how often to log (in episodes)
+- `--n-timesteps`: number of training timesteps
+- `--curriculum`: `none` or `basic`
+- `--n-envs` / `--vec-env`: parallel env count and backend
 - `--tensorboard-log`: directory for tensorboard logs
+- `--monitor-dir`: directory for Monitor CSV logs
+- `--record-rollouts`: after training, save replay GIFs plus JSON/Markdown summaries
 - `--progress-bar`: show a progress bar during training
 
-When the script starts it prints detected PyTorch devices (GPUs) and then creates the `DobotCubeStack-v0` environment and trains a `CrossQ` model from `sb3_contrib`.
+When the script starts it prints detected PyTorch devices and then creates the `DobotPickPlace-v0` environment. PPO is the default algorithm.
 
-Trained models are saved to `models/crossq_dobotcubestack` (see the end of `train.py`). Create the `models` directory if you plan to save runs.
+Trained models are saved under `models/`. If you pass `--record-rollouts`, curated replay bundles are written under `recordings/`, including:
+- top reward episodes
+- high reward failures
+- random sample episodes
+- `report.md` with clickable links to each GIF/JSON summary
+
+Example:
+
+```bash
+python train.py \
+  --algo ppo \
+  --curriculum basic \
+  --n-timesteps 200000 \
+  --n-envs 8 \
+  --vec-env subproc \
+  --episode-steps 200 \
+  --rollout-steps 128 \
+  --batch-size 256 \
+  --device cpu \
+  --record-rollouts
+```
+
+If you already have a checkpoint and just want the review bundle:
+
+```bash
+python record_rollouts.py --model-path models/ppo_dobotpickplace_v0.zip
+```
 
 ## Project structure (important files)
 

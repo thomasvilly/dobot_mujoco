@@ -277,15 +277,24 @@ class MujocoRobotEnv(BaseRobotEnv):
 
         self._mujoco = mujoco
         self._utils = mujoco_utils
+        self._default_camera_config = default_camera_config
 
         super().__init__(**kwargs)
+
+        self.mujoco_renderer = None
+        if self.render_mode is not None:
+            self._ensure_renderer()
+
+    def _ensure_renderer(self) -> None:
+        if self.mujoco_renderer is not None:
+            return
 
         from gymnasium.envs.mujoco.mujoco_rendering import MujocoRenderer
 
         self.mujoco_renderer = MujocoRenderer(
             self.model,
             self.data,
-            default_camera_config,
+            self._default_camera_config,
             width=self.width,
             height=self.height,
         )
@@ -322,6 +331,7 @@ class MujocoRobotEnv(BaseRobotEnv):
         Returns:
             rgb image (np.ndarray): if render_mode is "rgb_array", return a 3D image array.
         """
+        self._ensure_renderer()
         self._render_callback()
         return self.mujoco_renderer.render(self.render_mode)
 
